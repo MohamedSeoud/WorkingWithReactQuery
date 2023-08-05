@@ -1,12 +1,13 @@
 import axios from 'axios';
-import { useQuery } from 'react-query'
+import { useMutation, useQuery, useQueryClient } from 'react-query'
 
 
-type DataResponse={
+export type DataResponse={
     id:number,
     name:string,
     alterEgo:string
 }
+
 
 
 const fetchDataById= (id:number):Promise<DataResponse>=>{
@@ -16,6 +17,10 @@ const fetchDataById= (id:number):Promise<DataResponse>=>{
 
 const fetchData = ():Promise<DataResponse[]>=>{
     return axios.get("http://localhost:4000/superheros").then(data=>data.data).catch(err=>console.log(err))
+}
+
+const AddData = (hero:DataResponse):Promise<DataResponse[]>=>{
+    return axios.post("http://localhost:4000/superheros",hero).then(data=>data.data).catch(err=>console.log(err))
 }
 
 export const GetSuperHeros =(onSuccess:()=>void,onError:()=>void)=>{
@@ -32,6 +37,15 @@ export const GetSuperHeros =(onSuccess:()=>void,onError:()=>void)=>{
 }
 
 export const GetSuperHeroById =(id:number)=>{
-    const{isLoading,isError,error,refetch,data}= useQuery(['super-heros',id],()=>fetchDataById(id))
+    const{isLoading,isError,error,refetch,data}= useQuery(['super-hero',id],()=>fetchDataById(id))
     return{isLoading,isError,error,refetch,data}
+}
+
+export const AddSuperHero =()=>{
+    const queryClient = useQueryClient()
+return useMutation(AddData,{
+    onSuccess:()=>{
+        queryClient.invalidateQueries('super-heros')
+    }
+})
 }

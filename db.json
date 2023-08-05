@@ -1,0 +1,42 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  },
+
+  "superheros":[
+    {"id":1,
+     "name":"BatMan",
+     "alterEgo":"BruceWayne"
+    },
+    {"id":2,
+     "name":"SuperMan",
+     "alterEgo":"MohamedSeoud"
+    },
+    {"id":3,
+     "name":"SpiderMAN",
+     "alterEgo":"AdeleSuter"
+    },
+    {"id":4,
+     "name":"GreenMan",
+     "alterEgo":"SuiterShoulder"
+    },
+    {"id":5,
+     "name":"Negative",
+     "alterEgo":"Samir"
+    }
+]
+}
